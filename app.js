@@ -16,7 +16,11 @@ var app = new Vue({
     submitButton: function submitButton (answer) {
       // Modifie la propriété succès en fonction de la réponse (QCM)
       var correction = this.step.choices[this.step.answer];
-
+      if (answer === correction) {
+        this.success = true;
+      } else {
+        this.success = false;
+      }
       // ******* Ecris ici la condition nécessaire
     },
     submitText: function submitText () {
@@ -24,9 +28,20 @@ var app = new Vue({
       var answer = this.$refs.textInput.value;
       var correction = this.step.answer;
 
+      if (answer === correction) {
+        this.success = true;
+    } else {
+        this.success = false;
+
+        }
       // ******* Ecris ici la condition nécessaire
     },
     nextQuestion: function nextQuestion () {
+      if (this.success === true) {
+        this.score++;
+      }
+      this.success = null;
+      this.current++;
       // Incrémente le score, réinitialise la propriété succès, passe à la question suivante
 
       // ******* Ecris ici les actions et la condition nécessaires
